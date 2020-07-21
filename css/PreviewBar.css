@@ -1,0 +1,61 @@
+.agility-preview-bar {
+    background-color: #373939;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.agility-preview-bar__logo {
+    background-color: #ffcb28;
+}
+
+.agility-preview-bar__text {
+    color: #fff;
+    font-size: 1rem;
+    /*font-family: sans-serif;*/
+}
+
+.agility-preview-bar__btn {
+    display: inline-block;
+    border: none;
+    padding: .5rem .8rem;
+    margin: 0;
+    text-decoration: none;
+    background: #373939;
+    border: 2px solid #fff;
+    color: #fff;
+    /*font-family: sans-serif;*/
+    font-size: .8rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 3px!important;
+    margin-right: 1rem;
+}
+
+.agility-preview-bar__btn:hover,
+.agility-preview-bar__btn:focus {
+    background: #222;
+}
+
+.agility-preview-bar__btn:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+.agility-preview-bar__btn:active {
+    transform: scale(0.99);
+}
+
+.agility-preview-bar__btn-share {
+    background-color: #4600a8;
+}
+
+.agility-preview-bar__btn-share:hover,
+.agility-preview-bar__btn-share:focus {
+    background: #1d0046;
+}
+
