@@ -4,6 +4,7 @@ import GlobalHeader from '../components/GlobalHeader'
 
 //Agility API stuff
 import { agilityConfig, getSyncClient } from './agility.config'
+import GlobalFooter from 'components/GlobalFooter'
 
 const securityKey = agilityConfig.securityKey
 const channelName = agilityConfig.channelName
@@ -51,7 +52,6 @@ export async function getAgilityPageProps({ context }) {
 	let pageInSitemap = sitemap[path];
 	let page = null;
 	let dynamicPageItem = null;
-
 
 	if (path === '/') {
 		let firstPagePathInSitemap = Object.keys(sitemap)[0];
@@ -144,6 +144,7 @@ export async function getAgilityPageProps({ context }) {
 
 	//resolve data for other shared components
 	const globalHeaderProps = await GlobalHeader.getCustomInitialProps({ agility: agilitySyncClient.store, languageCode: languageCode, channelName: channelName });
+	const globalFooterProps = await GlobalFooter.getCustomInitialProps({ agility: agilitySyncClient.store, languageCode: languageCode, channelName: channelName });
 
 	return {
 		sitemapNode: pageInSitemap,
@@ -151,14 +152,13 @@ export async function getAgilityPageProps({ context }) {
 		dynamicPageItem,
 		pageTemplateName,
 		globalHeaderProps,
+		globalFooterProps,
 		languageCode,
 		channelName,
 		isPreview,
 		isDevelopmentMode
 	}
 }
-
-
 
 
 export async function getAgilityPaths() {
@@ -183,18 +183,23 @@ export async function getAgilityPaths() {
 		languageCode
 	})
 
+
 	if (!sitemapFlat) {
 		console.warn("Agility CMS => No Site map found.  Make sure your environment variables are setup correctly.")
 		if (isDevelopmentMode) {
-			console.warn("Agility CMS => Then run: npm run cms-pull")
+			console.warn("Agility CMS => Then run: npm run cms-pull or yarn cms-pull")
 		}
 		return []
 	}
 
-	return Object.keys(sitemapFlat).map(s => {
+	const paths = Object.keys(sitemapFlat).map(s => {
 		//returns an array of paths as a string (i.e.  ['/home', '/posts'] as opposed to [{ params: { slug: 'home'}}]))
 		return s;
 	})
+
+	console.log(paths)
+
+	return paths
 }
 
 

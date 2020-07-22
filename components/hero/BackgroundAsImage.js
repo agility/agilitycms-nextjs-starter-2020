@@ -16,7 +16,7 @@ const StyledHeader = styled(Header)`
   }
 `;
 const Container = styled.div`
-  ${tw`relative -mx-8 -mt-8 bg-center bg-cover`}
+  ${tw`relative -mx-8 bg-center bg-cover`}
   background-image: url("https://images.unsplash.com/photo-1522071901873-411886a10004?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80");
 `;
 
@@ -82,7 +82,6 @@ export default () => {
     <Container>
       <OpacityOverlay />
       <HeroContainer>
-        <StyledHeader links={navLinks} />
         <TwoColumn>
           <LeftColumn>
             <Notification>We have now launched operations in Europe.</Notification>

@@ -1,5 +1,6 @@
 import PreviewBar from './PreviewBar'
 import GlobalHeader from './GlobalHeader'
+import GlobalFooter from './GlobalFooter'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
@@ -19,7 +20,7 @@ export default function Layout(props) {
 	}
 
 	//BUG: when dynamic imports used in this case, the HTML does not output SSR
-	const AgilityPageTemplate = dynamic(() => import ('./agility-pageTemplates/' + props.pageTemplateName));
+	const AgilityPageTemplate = dynamic(() => import('./agility-pageTemplates/' + props.pageTemplateName));
 	//const AgilityPageTemplate = require('./agility-pageTemplates/' + props.pageTemplateName + '.js').default;
 
 	return (
@@ -31,12 +32,14 @@ export default function Layout(props) {
 				<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
 			</Head>
-			<AnimationRevealPage>
 			<PreviewBar {...props} />
-				<GlobalHeader {...props} />
+			<AnimationRevealPage disabled>
+			<GlobalHeader {...props} />
 
 				<AgilityPageTemplate {...props} />
+				<GlobalFooter {...props} />
 			</AnimationRevealPage>
+
 		</>
 	)
 }

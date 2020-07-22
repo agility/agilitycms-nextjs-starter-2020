@@ -90,6 +90,8 @@ GlobalHeader.getCustomInitialProps = async function (props) {
 			languageCode: languageCode,
 		});
 
+
+
 		//get rid of the children, we only care about the top-level
 		sitemap = sitemap.forEach(s => {
 			if (s.path == '/home') {
@@ -98,7 +100,6 @@ GlobalHeader.getCustomInitialProps = async function (props) {
 			s.children = [];
 			topLevelSitemap.push(s);
 		})
-
 
 	} catch (error) {
 		if (console) console.error("Could not load nested sitemap.", error);
