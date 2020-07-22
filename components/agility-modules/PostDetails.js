@@ -63,7 +63,7 @@ PostDetails.getCustomInitialProps = async function ({item, agility, languageCode
 
 	try {
 
-		if (! dynamicPageItem.seo.metaDescription || dynamicPageItem.seo.metaDescription.trim() === "") {
+		if (! dynamicPageItem.seo?.metaDescription) {
 			const description = truncate(dynamicPageItem.fields.content, { length: 160, decodeEntities: true, stripTags: true, reserveLastWord: true })
 			dynamicPageItem.seo.metaDescription = description;
 		}
