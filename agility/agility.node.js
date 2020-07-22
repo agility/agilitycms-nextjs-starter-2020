@@ -197,8 +197,6 @@ export async function getAgilityPaths() {
 		return s;
 	})
 
-	console.log(paths)
-
 	return paths
 }
 
@@ -262,8 +260,6 @@ const validateSlugForPreview = async ({ slug }) => {
 		channelName,
 		languageCode
 	})
-
-	console.log("Sitemap Flat", sitemapFlat)
 
 	const pageInSitemap = sitemapFlat[slug];
 
