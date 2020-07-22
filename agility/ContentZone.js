@@ -9,7 +9,7 @@ export default function ContentZone({ name, page, dynamicPageItem }) {
 
 		const modulesToRender = modules.map(m => {
 
-			let AgilityModule = dynamic(() => import('components/agility-Modules/' + m.moduleName + '.js'))
+			let AgilityModule = dynamic(() => import('components/agility-modules/' + m.moduleName + '.js'))
 
 			return <AgilityModule key={m.item.contentID} page={page} dynamicPageItem={dynamicPageItem} {...m.item} />
 		})
