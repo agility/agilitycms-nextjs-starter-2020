@@ -55,8 +55,8 @@ PostsListing.getCustomInitialProps = async function ({agility, channelName, lang
 			//TODO: resolve the tags here
 			const tagIDStr = post.fields.tags?.sortids;
 
-			const category = categories.find(c => c.contentID == categoryID);
-			const author = authors.find(a => a.contentID == authorID);
+			const category = categories?.find(c => c.contentID == categoryID);
+			const author = authors?.find(a => a.contentID == authorID);
 
 			let imageSrc = post.fields.image?.url
 			if (imageSrc !== undefined && imageSrc !== null) {
