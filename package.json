@@ -5,9 +5,9 @@
   "scripts": {
     "dev": " next dev",
     "build": "next build",
-	"start": "next start",
-	"cms-pull": "NODE_ENV=development node agility/agility.sync.js sync",
-	"cms-clear": "NODE_ENV=development node agility/agility.sync.js clear"
+    "start": "next start",
+    "cms-pull": "NODE_ENV=development node agility/agility.sync.js sync",
+    "cms-clear": "NODE_ENV=development node agility/agility.sync.js clear"
   },
   "dependencies": {
     "@agility/content-fetch": "^0.8.2",
@@ -21,7 +21,9 @@
     "react-slick": "^0.27.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.1",
-    "tailwindcss": "^1.5.2",
+    "tailwindcss": "1.4.6",
+    "tailwindcss-typography": "^3.1.0",
+    "truncate-html": "^1.0.3",
     "twin.macro": "^1.5.1",
     "use-in-view": "^1.0.15"
   },

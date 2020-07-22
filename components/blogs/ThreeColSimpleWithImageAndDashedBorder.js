@@ -45,13 +45,7 @@ const DecoratorBlob2 = tw(
   SvgDecoratorBlob2
 )`-z-10 absolute top-0 left-0 w-48 h-48 transform -translate-x-32 translate-y-full opacity-25`;
 
-export default ({
-  subheading = "Blog",
-  heading = <>We Love <span tw="text-primary-500">Writing.</span></>,
-  description = "Some amazing blog posts that are written by even more amazing people.",
-
-}) => {
-  const blogPosts = [
+const blogPosts = [
     {
       imageSrc:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
@@ -80,6 +74,15 @@ export default ({
       url: "https://timerse.com"
     }
   ];
+
+export default ({
+  subheading = "Blog",
+  heading = <>We Love <span tw="text-primary-500">Writing.</span></>,
+  description = "Some amazing blog posts that are written by even more amazing people.",
+  readMore = "Read Post",
+	posts = blogPosts
+}) => {
+
   return (
     <Container>
       <Content>
@@ -89,7 +92,7 @@ export default ({
           <HeadingDescription>{description}</HeadingDescription>
         </HeadingInfoContainer>
         <ThreeColumn>
-          {blogPosts.map((post, index) => (
+          {posts.map((post, index) => (
             <Column key={index}>
               <Card>
                 <Image imageSrc={post.imageSrc} />
@@ -106,7 +109,7 @@ export default ({
                   </MetaContainer>
                   <Title>{post.title}</Title>
                   <Description>{post.description}</Description>
-                  <Link href={post.url}>Read Post</Link>
+                  <Link href={post.url}>{readMore}</Link>
                 </Details>
               </Card>
             </Column>
