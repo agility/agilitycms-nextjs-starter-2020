@@ -68,7 +68,7 @@ export default ({
     <Container>
       <TwoColumn>
         <LeftColumn>
-          <StyledHeader links={navLinks} collapseBreakpointClass="sm" />
+
           <Content>
             <Heading>{heading}</Heading>
             <Paragraph>{description}</Paragraph>

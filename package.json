@@ -5,9 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+	"start": "next start",
+	"cms-pull": "NODE_ENV=development node agility/agility.sync.js sync",
+	"cms-clear": "NODE_ENV=development node agility/agility.sync.js clear"
   },
   "dependencies": {
+    "@agility/content-fetch": "^0.8.2",
+    "@agility/content-sync": "^0.1.8",
     "feather-icons": "^4.28.0",
     "framer-motion": "^2.1.0",
     "next": "9.4.4",
