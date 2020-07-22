@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link"
 import tw from "twin.macro";
 import styled from "styled-components";
 import {css} from "styled-components/macro"; //eslint-disable-line
@@ -34,8 +35,8 @@ const Meta = styled.div`
 
 const Title = tw.h5`mt-4 leading-snug font-bold text-lg`;
 const Description = tw.p`mt-2 text-sm text-secondary-100`;
-const Link = styled(PrimaryButtonBase).attrs({as: "a"})`
-  ${tw`inline-block mt-4 text-sm font-semibold`}
+const ALink = styled(PrimaryButtonBase).attrs({as: "a"})`
+  ${tw`inline-block mt-4 text-sm font-semibold cursor-pointer`}
 `
 
 const DecoratorBlob1 = tw(
@@ -109,7 +110,7 @@ export default ({
                   </MetaContainer>
                   <Title>{post.title}</Title>
                   <Description>{post.description}</Description>
-                  <Link href={post.url}>{readMore}</Link>
+                  <Link href={post.url}  as={post.url}><ALink >{readMore}</ALink></Link>
                 </Details>
               </Card>
             </Column>
