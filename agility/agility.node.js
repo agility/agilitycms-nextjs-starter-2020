@@ -37,8 +37,9 @@ export async function getAgilityPageProps({ context }) {
 		await agilitySyncClient.runSync();
 	}
 
-
-	console.log(`Agility CMS => Getting page props for '${path}'...`);
+	if (isDevelopmentMode) {
+		console.log(`Agility CMS => Getting page props for '${path}'...`);
+	}
 
 
 	//get sitemap
@@ -108,7 +109,10 @@ export async function getAgilityPageProps({ context }) {
 
 				if (ModuleComponentToRender.getCustomInitialProps) {
 					//we have some additional data in the module we'll need, execute that method now, so it can be included in SSG
-					console.log(`Agility CMS => Fetching additional data via getCustomInitialProps for ${moduleItem.module}...`);
+					if (isDevelopmentMode) {
+						console.log(`Agility CMS => Fetching additional data via getCustomInitialProps for ${moduleItem.module}...`);
+					}
+
 					moduleData = await ModuleComponentToRender.getCustomInitialProps({
 						item: moduleItem.item,
 						agility: agilitySyncClient.store,
