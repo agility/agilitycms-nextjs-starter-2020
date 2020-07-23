@@ -18,18 +18,10 @@ import {RichText} from "./RichTextArea"
 
 import { renderHTML } from "agility/utils"
 
-const PostDetails = ({ dynamicPageItem}) => {
+const PostDetails = ({ dynamicPageItem, customData}) => {
 
-	const post = dynamicPageItem.fields
-	const tagNames = post.tags?.map(t => t.fields.title).join(",")
-	const dateStr = new Date(post.date).toLocaleString()
+	const post = dynamicPageItem.fields;
 
-	let imageUrl = post.image?.url;
-	if (imageUrl) {
-		if (post.image.pixelWidth > 1200) {
-			imageUrl = `${post.image.url}?w=1200`
-		}
-	}
 
 	return (
 		<Container>
@@ -38,14 +30,15 @@ const PostDetails = ({ dynamicPageItem}) => {
 					<Heading>{post.title}</Heading>
 				</HeadingRow>
 				<About>
-					<Category>{ post.category?.fields.title }</Category>
-					<Author>{ post.author?.fields.name }</Author>
-					<DateField>{  dateStr }</DateField>
-					<Tag>{ tagNames }</Tag>
+					<Category>{ customData.category }</Category>
+
+					<Author>{ customData.authorName }</Author>
+					<DateField>{  customData.dateStr }</DateField>
+					<Tag>{ customData.tagNames }</Tag>
 				</About>
-				{ imageUrl &&
+				{ customData.imageUrl &&
 					<ImageRow>
-						<Image src={imageUrl} alt={post.image.label} />
+						<Image src={customData.imageUrl} alt={post.image.label} />
 					</ImageRow>
 				}
 
@@ -63,20 +56,41 @@ PostDetails.getCustomInitialProps = async function ({item, agility, languageCode
 
 	try {
 
+		const post = dynamicPageItem.fields
+
+		const tagNames = post.tags?.map(t => t?.fields?.title).join(",")
+		const dateStr = new Date(post.date).toLocaleString()
+		let category = null;
+		let authorName = null;
+		if (post.category?.fields) category = post.category.fields?.title
+		if (post.author?.fields) authorName = post.author.fields?.name
+
+
+		let imageUrl = post.image?.url;
+		if (imageUrl) {
+			if (post.image.pixelWidth > 1200) {
+				imageUrl = `${post.image.url}?w=1200`
+			}
+		}
+
 		if (! dynamicPageItem.seo) dynamicPageItem.seo = {}
 
 		if (! dynamicPageItem.seo?.metaDescription) {
 			const description = truncate(dynamicPageItem.fields.content, { length: 160, decodeEntities: true, stripTags: true, reserveLastWord: true })
-			if (!)
+
 			dynamicPageItem.seo.metaDescription = description;
 		}
 
-		if (dynamicPageItem.fields.image) {
-			if (dynamicPageItem.fields.image.pixelWidth > 1200) {
-				dynamicPageItem.seo.ogImage =  `${dynamicPageItem.fields.image.url}?w=1200`
-			} else {
-				dynamicPageItem.seo.ogImage =  dynamicPageItem.fields.image.url
-			}
+		if (imageUrl) {
+			dynamicPageItem.seo.ogImage =  imageUrl
+		}
+
+		return  {
+			category,
+			tagNames,
+			dateStr,
+			authorName,
+			imageUrl
 		}
 
 	} catch (error) {
