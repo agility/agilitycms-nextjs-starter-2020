@@ -1,10 +1,10 @@
 import crypto from 'crypto'
 import { asyncForEach } from "./utils"
-import GlobalHeader from '../components/GlobalHeader'
+import GlobalHeader from 'components/agility-global/GlobalHeader'
 
 //Agility API stuff
 import { agilityConfig, getSyncClient } from './agility.config'
-import GlobalFooter from 'components/GlobalFooter'
+import GlobalFooter from 'components/agility-global/GlobalFooter'
 
 const securityKey = agilityConfig.securityKey
 const channelName = agilityConfig.channelName
@@ -12,7 +12,6 @@ const languageCode = agilityConfig.languageCode
 const isDevelopmentMode = process.env.NODE_ENV === "development"
 
 export async function getAgilityPageProps({ context }) {
-
 
 	let path = '/';
 	if (context.params) {

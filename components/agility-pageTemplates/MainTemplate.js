@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContentZone from 'agility/ContentZone'
+import ContentZone from 'components/agility-global/ContentZone'
 
 class OneColumnTemplate extends Component {
     render() {

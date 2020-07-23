@@ -17,7 +17,7 @@ export default function Layout(props) {
 		return <div>Loading...</div>
 	}
 
-	const AgilityPageTemplate = dynamic(() => import('./agility-pageTemplates/' + props.pageTemplateName));
+	const AgilityPageTemplate = dynamic(() => import('components/agility-pageTemplates/' + props.pageTemplateName));
 
 	if (dynamicPageItem?.seo?.metaDescription) {
 		page.seo.metaDescription = dynamicPageItem.seo.metaDescription

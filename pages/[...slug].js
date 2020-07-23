@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getAgilityPageProps, getAgilityPaths } from 'agility/agility.node'
 import { handlePreview } from 'agility/agility.browser'
-import Layout from 'components/Layout'
+import Layout from 'components/agility-global/Layout'
 
 class AgilityPage extends Component {
 	render() {

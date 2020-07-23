@@ -21,8 +21,8 @@ const LinkListItem = tw.li`mt-3`;
 const Link = tw.a`border-b-2 border-transparent hocus:text-primary-500 hocus:border-primary-500 pb-1 transition duration-300`;
 
 const LogoContainer = tw.div`flex items-center justify-center md:justify-start`;
-const LogoImg = tw.img`w-8`;
-const LogoText = tw.h5`ml-2 text-xl font-black text-primary-500`;
+const LogoImg = tw.img`w-8 mr-2`;
+const LogoText = tw.h5`text-xl font-black text-primary-500`;
 
 const CompanyDescription = tw.p`mt-4 max-w-xs font-medium text-sm mx-auto md:mx-0 md:mr-4 `;
 
@@ -30,86 +30,82 @@ const SocialLinksContainer = tw.div`mt-4 `;
 const SocialLink = styled.a`
   ${tw`cursor-pointer inline-block p-2 rounded-full bg-gray-700 text-gray-100 hover:bg-gray-900 transition duration-300 mr-4`}
   svg {
-    ${tw`w-4 h-4`}
+	${tw`w-4 h-4`}
   }
 `;
 
-export default () => {
+const defaultProps = {
+	siteName: "Sitename Inc",
+	siteDescription: "This is the site description",
+	column2Title: "Column 2 Title",
+	column3Title: "Column 3 Title",
+	column4Title: "Column 4 Title",
+	facebookURL: "https://facebook.com",
+	twitterURL: "https://twitter.com",
+	youTubeURL: "https://youtube.com",
+	column2Links: [{href: "/blog", target: "_self", text: "Blog"}],
+	column3Links: [{href: "#", target: "_self", text: "Column 3 Link"}],
+	column4Links: [{href: "#", target: "_self", text: "Column 4 Link"}],
+
+}
+
+export default (props) => {
+	if (! props.siteName) props = null
+	const vals = props || defaultProps;
+
   return (
-    <Container>
-      <FiveColumns>
-        <WideColumn>
-          <LogoContainer>
-            <LogoImg src={LogoImage} />
-            <LogoText>Treact Inc.</LogoText>
-          </LogoContainer>
-          <CompanyDescription>
-            Treact is an Internet Technology company providing design resources such as website templates and themes.
-          </CompanyDescription>
-          <SocialLinksContainer>
-            <SocialLink href="https://facebook.com">
-              <FacebookIcon />
-            </SocialLink>
-            <SocialLink href="https://twitter.com">
-              <TwitterIcon />
-            </SocialLink>
-            <SocialLink href="https://youtube.com">
-              <YoutubeIcon />
-            </SocialLink>
-          </SocialLinksContainer>
-        </WideColumn>
-        <Column>
-          <ColumnHeading>Quick Links</ColumnHeading>
-          <LinkList>
-            <LinkListItem>
-              <Link href="#">Blog</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">FAQs</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Support</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">About Us</Link>
-            </LinkListItem>
-          </LinkList>
-        </Column>
-        <Column>
-          <ColumnHeading>Product</ColumnHeading>
-          <LinkList>
-            <LinkListItem>
-              <Link href="#">Log In</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Personal</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Business</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Team</Link>
-            </LinkListItem>
-          </LinkList>
-        </Column>
-        <Column>
-          <ColumnHeading>Legal</ColumnHeading>
-          <LinkList>
-            <LinkListItem>
-              <Link href="#">GDPR</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Privacy Policy</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Terms of Service</Link>
-            </LinkListItem>
-            <LinkListItem>
-              <Link href="#">Disclaimer</Link>
-            </LinkListItem>
-          </LinkList>
-        </Column>
-      </FiveColumns>
-    </Container>
+	<Container>
+	  <FiveColumns>
+		<WideColumn>
+		  <LogoContainer>
+			<LogoText>{vals.siteName}</LogoText>
+		  </LogoContainer>
+		  <CompanyDescription>
+			{vals.siteDescription}
+		  </CompanyDescription>
+		  <SocialLinksContainer>
+			<SocialLink href={vals.facebookURL}>
+			  <FacebookIcon />
+			</SocialLink>
+			<SocialLink href={vals.twitterURL}>
+			  <TwitterIcon />
+			</SocialLink>
+			<SocialLink href={vals.youTubeURL}>
+			  <YoutubeIcon />
+			</SocialLink>
+		  </SocialLinksContainer>
+		</WideColumn>
+		<Column>
+			<ColumnHeading>{vals.column2Title}</ColumnHeading>
+			<LinkList>
+			{ vals.column2Links.map((link, index) => (
+				<LinkListItem key={`col2-${index}`}>
+					<Link href={link.href} target={link.target}>{link.text}</Link>
+				</LinkListItem>
+			)) }
+			</LinkList>
+		</Column>
+		<Column>
+		  <ColumnHeading>{vals.column3Title}</ColumnHeading>
+		  <LinkList>
+		  { vals.column3Links.map((link, index) => (
+				<LinkListItem key={`col3-${index}`}>
+					<Link href={link.href} target={link.target}>{link.text}</Link>
+				</LinkListItem>
+			)) }
+		  </LinkList>
+		</Column>
+		<Column>
+		  <ColumnHeading>{vals.column4Title}</ColumnHeading>
+		  <LinkList>
+		  { vals.column4Links.map((link, index) => (
+				<LinkListItem key={`col4-${index}`}>
+					<Link href={link.href} target={link.target}>{link.text}</Link>
+				</LinkListItem>
+			)) }
+		  </LinkList>
+		</Column>
+	  </FiveColumns>
+	</Container>
   );
 };

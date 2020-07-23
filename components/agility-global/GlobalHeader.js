@@ -1,12 +1,14 @@
 import React, { Component, useState } from 'react';
 import Link from 'next/link';
-import Header from "components/headers/light.js";
+import Header, { NavLink, NavLinks, PrimaryLink, LogoLink } from "components/headers/light";
 
 
 const GlobalHeader = (props) => {
 	const { globalHeaderProps, sitemapNode, page } = props;
 
 	const globalHeaderItem = globalHeaderProps.contentItem;
+	let siteName = globalHeaderItem?.fields.siteName || "Agility Starter 2020"
+	let logo = globalHeaderItem?.fields.logo || nulll
 
 	const renderLinks = (kind) => {
 
@@ -53,8 +55,29 @@ const GlobalHeader = (props) => {
 
 	}
 
+	const logoLink = (
+		<Link href={'/'}><LogoLink>
+		{ logo &&
+			<img src={logo.url} alt={logo.label} />
+		}
+		{siteName}
+		</LogoLink></Link>
+	  );
+
+	const links = [
+		<NavLinks key={1}>
+			{ globalHeaderProps.links.map(link => (
+				<Link key={link.path} href={link.path} as={link.path}><NavLink>{link.text}</NavLink></Link>
+			)) }
+			{
+				globalHeaderItem.fields.primaryCTA &&
+				<PrimaryLink href={globalHeaderItem.fields.primaryCTA.href} target={globalHeaderItem.fields.primaryCTA.target}>{globalHeaderItem.fields.primaryCTA.text}</PrimaryLink>
+			}
+		</NavLinks>
+	]
+
 	return (
-		<Header/>
+		<Header {...{links, logoLink}} />
 	)
 
 }
@@ -65,7 +88,7 @@ GlobalHeader.getCustomInitialProps = async function (props) {
 	const languageCode = props.languageCode;
 	const channelName = props.channelName;
 	let contentItem = null;
-	let topLevelSitemap = [];
+	let links = [];
 
 	try {
 		//get the global header
@@ -90,16 +113,15 @@ GlobalHeader.getCustomInitialProps = async function (props) {
 			languageCode: languageCode,
 		});
 
-
-
-		//get rid of the children, we only care about the top-level
-		sitemap = sitemap.forEach(s => {
-			if (s.path == '/home') {
-				s.path = '/'
-			}
-			s.children = [];
-			topLevelSitemap.push(s);
-		})
+		//grab the top level links that are visible on menu
+		links = sitemap
+			.filter(node => node.visible.menu)
+			.map(node => {
+				return {
+					text: node.menuText || node.title,
+					path: node.path
+				}
+			})
 
 	} catch (error) {
 		if (console) console.error("Could not load nested sitemap.", error);
@@ -107,7 +129,7 @@ GlobalHeader.getCustomInitialProps = async function (props) {
 
 	return {
 		contentItem,
-		sitemap: topLevelSitemap
+		links
 	}
 }
 

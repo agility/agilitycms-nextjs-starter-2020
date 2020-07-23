@@ -1,7 +1,10 @@
 import Hero from "components/hero/BackgroundAsImage"
 
-export default () => {
+export default ({fields}) => {
+
+	console.log(fields)
+
 	return (
-		<Hero/>
+		<Hero {...fields}/>
 	)
 }

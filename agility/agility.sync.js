@@ -8,7 +8,7 @@ require("dotenv").config({
 	path: `.env.local`,
 })
 
-const { agilityConfig, getSyncClient } = require('./agility.config')
+const { getSyncClient } = require('./agility.config')
 
 
 const runSync = async () => {
@@ -37,6 +37,6 @@ if (process.argv[2]) {
 }
 
 module.exports = {
-	clearSync: clearSync,
-	runSync: runSync
+	clearSync,
+	runSync
 }
