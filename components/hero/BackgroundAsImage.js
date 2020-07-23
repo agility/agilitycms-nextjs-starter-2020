@@ -62,7 +62,7 @@ export default ({ backgroundImage, title, subTitle, announcement, primaryCTA, vi
 	}
 	if (backgroundImage && backgroundImage.url) {
 		containerStyle = {
-			backgroundImage: `url(${backgroundImage.url})`
+			backgroundImage: `url(${backgroundImage.url}?w=1920)`
 		}
 	}
 
