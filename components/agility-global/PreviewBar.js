@@ -32,7 +32,7 @@ const getPreviewLink = () => {
 		// Process our return data
 		if (xhr.status >= 200 && xhr.status < 300) {
 			// What do when the request is successful
-			console.log('success!', xhr);
+
 			const previewKey = xhr.responseText;
 			const previewLink = `${window.location.pathname}?agilitypreviewkey=${escape(previewKey)}`;
 

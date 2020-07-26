@@ -4,8 +4,9 @@ import tw from "twin.macro";
 import styled from "styled-components";
 
 import { Container, ContentWithPaddingLg } from "components/misc/Layouts";
+export const RichText = tw.div`prose prose-sm sm:prose lg:prose-lg xl:prose-xl`
 
-export const RichText = styled.div`
+export const RichTextXX = styled.div`
 ${tw`text-lg  text-gray-800`}
 p {
   ${tw`mt-2 leading-loose`}
