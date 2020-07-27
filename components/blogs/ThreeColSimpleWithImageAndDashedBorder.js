@@ -110,7 +110,7 @@ export default ({
                   </MetaContainer>
                   <Title>{post.title}</Title>
                   <Description>{post.description}</Description>
-                  <Link href={post.url}  as={post.url}><ALink >{readMore}</ALink></Link>
+                  <Link href={`/[...slug]`}  as={post.url}><ALink >{readMore}</ALink></Link>
                 </Details>
               </Card>
             </Column>

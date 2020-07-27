@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": " next dev",
+	"predev": "NODE_ENV=development node agility/agility.sync.js sync",
+	"dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "cms-pull": "NODE_ENV=development node agility/agility.sync.js sync",
+	"start": "next start",
+	"cms-pull": "NODE_ENV=development node agility/agility.sync.js sync",
     "cms-clear": "NODE_ENV=development node agility/agility.sync.js clear"
+
   },
   "dependencies": {
     "@agility/content-fetch": "^0.8.2",

@@ -18,7 +18,7 @@ const GlobalHeader = (props) => {
 		let links = globalHeaderProps.sitemap.map(node => {
 
 			let path = node.path;
-			let href = "/[...slug]"
+			let href = "/pages/[...slug]"
 			if (path === "/") href = "/"
 
 			if (kind === "mobile") {
@@ -67,7 +67,7 @@ const GlobalHeader = (props) => {
 	const links = [
 		<NavLinks key={1}>
 			{ globalHeaderProps.links.map(link => (
-				<Link key={link.path} href={link.path} as={link.path}><NavLink>{link.text}</NavLink></Link>
+				<Link key={link.path} href={`/[...slug]`} as={link.path}><NavLink>{link.text}</NavLink></Link>
 			)) }
 			{
 				globalHeaderItem.fields.primaryCTA &&

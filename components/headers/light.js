@@ -95,8 +95,24 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
     </LogoLink></Link>
   );
 
+
   logoLink = logoLink || defaultLogoLink;
   links = links || defaultLinks;
+
+/**
+ * Anytime the mobile navbar is clicked and it's an <a> tag
+ * we need to close the mobile navbar.
+ * This is because we're using <Link> tags (NextJS, Gatsby)
+ *
+ * @param {*} e
+ */
+const mobileNavBarClicked = (e) => {
+
+	if (e.target && e.target.tagName === "A") {
+	  toggleNavbar()
+	}
+  }
+
 
   return (
     <Header className={className || "header-light"}>
@@ -107,7 +123,7 @@ export default ({ roundedHeaderButton = false, logoLink, links, className, colla
 
       <MobileNavLinksContainer css={collapseBreakpointCss.mobileNavLinksContainer}>
         {logoLink}
-        <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks}>
+        <MobileNavLinks initial={{ x: "150%", display: "none" }} animate={animation} css={collapseBreakpointCss.mobileNavLinks} onClick={(e) => mobileNavBarClicked(e)}>
           {links}
         </MobileNavLinks>
         <NavToggle onClick={toggleNavbar} className={showNavLinks ? "open" : "closed"}>

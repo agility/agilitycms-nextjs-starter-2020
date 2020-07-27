@@ -4,6 +4,9 @@ import GlobalFooter from './GlobalFooter'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
+import tw from "twin.macro"
+
+const MainElem = tw.main`p-8`;
 
 import AnimationRevealPage from "helpers/AnimationRevealPage"
 
@@ -29,18 +32,20 @@ export default function Layout(props) {
 				<title>{sitemapNode?.title} - Agility CMS Sample Blog</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta name="description" content={page.seo.metaDescription} />
-				<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 				{ dynamicPageItem?.seo?.ogImage &&
 					<meta property="og:image" content={dynamicPageItem.seo.ogImage} />
 				}
+				<link rel="stylesheet" href="/prose.css" />
 
 			</Head>
 			<PreviewBar {...props} />
-			<AnimationRevealPage disable>
+			<MainElem>
+			{/* <AnimationRevealPage disabled> */}
 				<GlobalHeader {...props} />
 				<AgilityPageTemplate {...props} />
 				<GlobalFooter {...props} />
-			</AnimationRevealPage>
+			{/* </AnimationRevealPage> */}
+			</MainElem>
 
 		</>
 	)
