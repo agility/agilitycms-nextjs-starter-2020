@@ -28,10 +28,12 @@ Sign up for the [Agility CMS NextJS Starter](https://account.agilitycms.com/sign
 4. Rename the .env.local.example file to `.env.local`
 5. Retrieve your `GUID`, `API Keys (Preview/Fetch)` and `Security Key` from Agility CMS and place them in your `.env.local` file
 
+[How to Retreive your `GUID` and `API Keys`](https://help.agilitycms.com/hc/en-us/articles/360031919212-Retrieving-your-API-Key-s-Guid-and-API-URL-)
+
 - `AGILITY_GUID` should be the **Instance GUID** field
 - `AGILITY_API_FETCH_KEY` should be the **Live API Key** field
 - `AGILITY_API_PREVIEW_KEY` should be the **Preview API Key** field - this is used when the site is in [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) and allows your site to pull the latest content, regardless of whether it is published or not.
-- `AGILITY_SECURITY_KEY` should be the **Security Key** field that can be found in **Settings** > **Global Security** - this is used to communicate between the CMS and your site to validate [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode)
+- `AGILITY_SECURITY_KEY` should be the **Security Key** field that can be found in [**Settings** > **Global Security**](https://help.agilitycms.com/hc/en-us/articles/360029220591-How-to-Retrieve-an-Instance-s-Security-Key) - this is used to communicate between the CMS and your site to validate [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode)
 
 
 ## Deploy
