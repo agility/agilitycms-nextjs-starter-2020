@@ -35,7 +35,7 @@ Sign up for the [Agility CMS NextJS Starter](https://account.agilitycms.com/sign
 
 
 ## Deploy
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?c=1&amp;s=https://github.com/agility/agilitycms-nextjs-starter-2020&amp;env=AGILITY_GUID,AGILITY_API_FETCH_KEY,AGILITY_API_PREVIEW_KEY,AGILITY_SECURITY_KEY&amp;envDescription=API%20Keys%20required%20by%20Agility%20CMS&amp)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?c=1&amp;s=https://github.com/agility/agilitycms-nextjs-starter-2020&amp;env=AGILITY_GUID,AGILITY_API_FETCH_KEY,AGILITY_API_PREVIEW_KEY,AGILITY_SECURITY_KEY&amp;envDescription=API%20Keys%20required%20by%20Agility%20CMS&amp;)
 
 ☝️ Deploy this starter repo in just minutes with [Vercel](https://vercel.com/). It will prompt you to enter your `AGILITY_GUID`, , `AGILITY_API_FETCH_KEY`, `AGILITY_API_PREVIEW_KEY`, and `AGILITY_SECURITY_KEY`.
 
