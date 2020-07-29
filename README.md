@@ -9,10 +9,11 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 
 ## About This Website
-- connected to a sample Agility CMS instance to get content and pages
-- uses the `getStaticProps` function from Next.js to allow for full static site generation
-- supports full page management
-- provides a functional structure that dynamically routes each page based on the request, loads a page template dynamically, and also dynamically loads and renders appropriate Agility CMS modules (as React components)
+- Connected to a sample Agility CMS instance to get content and pages
+- Uses the `getStaticProps` function from Next.js to allow for full static site generation
+- Supports full page management
+- Supports preview mode
+- Provides a functional structure that dynamically routes each page based on the request, loads a page template dynamically, and also dynamically loads and renders appropriate Agility CMS modules (as React components)
 
 ### Built on Treact Components
 
@@ -24,10 +25,17 @@ Sign up for the [Agility CMS NextJS Starter](https://account.agilitycms.com/sign
 1. Clone this repository
 2. Run `npm install` or `yarn install`
 3. Run `npm run dev` or `yarn dev`
-4. Rename the .env.example file to `.env.local` and place your API Keys from your Agility account into it.
+4. Rename the .env.local.example file to `.env.local`
+5. Retrieve your `GUID`, `API Keys (Preview/Fetch)` and `Security Key` from Agility CMS and place them in your `.env.local` file
+
+- `AGILITY_GUID` should be the **Instance GUID** field
+- `AGILITY_API_FETCH_KEY` should be the **Live API Key** field
+- `AGILITY_API_PREVIEW_KEY` should be the **Preview API Key** field - this is used when the site is in [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) and allows your site to pull the latest content, regardless of whether it is published or not.
+- `AGILITY_SECURITY_KEY` should be the **Security Key** field that can be found in **Settings** > **Global Security** - this is used to communicate between the CMS and your site to validate [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode)
+
 
 ## Deploy
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.co/import/project?template=https://github.com/agility/agilitycms-nextjs-starter-2020)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?c=1&amp;s=https://github.com/agility/agilitycms-nextjs-starter-2020&amp;env=AGILITY_GUID,AGILITY_API_FETCH_KEY,AGILITY_API_PREVIEW_KEY,AGILITY_SECURITY_KEY&amp;envDescription=API%20Keys%20required%20by%20Agility%20CMS&amp)
 
 ☝️ Deploy this starter repo in just minutes with [Vercel](https://vercel.com/). It will prompt you to enter your `AGILITY_GUID`, , `AGILITY_API_FETCH_KEY`, `AGILITY_API_PREVIEW_KEY`, and `AGILITY_SECURITY_KEY`.
 
@@ -44,7 +52,7 @@ import Link from 'next/link';
 ```
 
 ## How to Preview Content?
-Since this is a static app, how can editors preview content in realtime as they are making edits in Agility CMS? Vercel supports this out to the box! Just [point your preview url in Agility CMS](https://help.agilitycms.com/hc/en-us/articles/360003855612-Adding-a-Domain-Configuration-for-a-Web-Server) to the address of your site deployed in Vercel, and it should work out in preview mode when you click "Preview" in Agility CMS.
+Since this is a static app, how can editors preview content in realtime as they are making edits in Agility CMS? Vercel supports this out to the box! Just [point your preview url in Agility CMS](https://help.agilitycms.com/hc/en-us/articles/360003855612-Adding-a-Domain-Configuration-for-a-Web-Server) to the address of your site deployed in Vercel, and it will enable preview mode when you click "Preview" in Agility CMS.
 
 ## Feedback and Questions
 
