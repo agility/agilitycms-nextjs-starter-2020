@@ -7,7 +7,7 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 [New to Agility CMS? Signup for a free account](https://agilitycms.com/free)
 
-
+ 
 ## About This Website
 - Connected to a sample Agility CMS instance to get content and pages
 - Uses the `getStaticProps` function from Next.js to allow for full static site generation
