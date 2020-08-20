@@ -26,7 +26,8 @@ export async function getStaticProps(context) {
 
 		const props = await getAgilityPageProps({ context });
 		return {
-			props: props
+			props: props,
+			revalidate: 1 //will refresh page every 1 second on Vercel
 		}
 	} catch (e) {
 		return {
@@ -39,8 +40,7 @@ export async function getStaticPaths() {
 	const paths = await getAgilityPaths();
 	return {
 		paths: paths,
-		fallback: true,
-		revalidate: 1 //will refresh page every 1 second on Vercel
+		fallback: true
 	}
 }
 
