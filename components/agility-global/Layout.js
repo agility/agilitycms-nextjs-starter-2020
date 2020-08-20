@@ -9,15 +9,21 @@ import tw from "twin.macro"
 const MainElem = tw.main`p-8`;
 
 import AnimationRevealPage from "helpers/AnimationRevealPage"
+import Error from 'next/error'
 
 export default function Layout(props) {
-	const { page, sitemapNode, dynamicPageItem } = props
+	const { page, sitemapNode, dynamicPageItem, notFound } = props
 
 	// If the page is not yet generated, this will be displayed
 	// initially until getStaticProps() finishes running
 	const router = useRouter()
 	if (router.isFallback) {
-		return <div>Loading...</div>
+		return <div>Loading page...</div>
+	}
+
+	console.log("notFound", notFound)
+	if(notFound === true) {
+		return <Error statusCode="404" />
 	}
 
 	const AgilityPageTemplate = dynamic(() => import('components/agility-pageTemplates/' + props.pageTemplateName));
@@ -32,6 +38,8 @@ export default function Layout(props) {
 				<title>{sitemapNode?.title} - Agility CMS Sample Blog</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 				<meta name="description" content={page.seo.metaDescription} />
+				<meta name="generator" content="Agility CMS" />
+				<meta name="agility_timestamp" content={new Date().toLocaleString()} />
 				{ dynamicPageItem?.seo?.ogImage &&
 					<meta property="og:image" content={dynamicPageItem.seo.ogImage} />
 				}
@@ -39,7 +47,7 @@ export default function Layout(props) {
 
 			</Head>
 			<PreviewBar {...props} />
-			{new Date().toLocaleString()}
+			
 			<MainElem>
 			{/* <AnimationRevealPage disabled> */}
 				<GlobalHeader {...props} />

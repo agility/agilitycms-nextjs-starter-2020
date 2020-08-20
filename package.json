@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node agility/agility.sync.js sync",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "cms-pull": "node agility/agility.sync.js sync",
     "cms-clear": "node agility/agility.sync.js clear"
   },
   "dependencies": {

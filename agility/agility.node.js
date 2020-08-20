@@ -9,8 +9,8 @@ import GlobalFooter from 'components/agility-global/GlobalFooter'
 const securityKey = agilityConfig.securityKey
 const channelName = agilityConfig.channelName
 const languageCode = agilityConfig.languageCode
-//const isDevelopmentMode = process.env.NODE_ENV === "development"
-const isDevelopmentMode = false;
+const isDevelopmentMode = process.env.NODE_ENV === "development"
+
 
 export async function getAgilityPageProps({ context, res }) {
 
@@ -24,7 +24,7 @@ export async function getAgilityPageProps({ context, res }) {
 	}
 
 	//determine if we are in preview mode
-	const isPreview = (context.preview || isDevelopmentMode ? true : false);
+	const isPreview = (context.preview || isDevelopmentMode);
 
 	const agilitySyncClient = getSyncClient({
 		isPreview: isPreview,
@@ -47,7 +47,7 @@ export async function getAgilityPageProps({ context, res }) {
 	const sitemap = await agilitySyncClient.store.getSitemap({ channelName, languageCode });
 
 	if (sitemap === null) {
-		console.warn("Agility CMS => No sitemap found.  Have you run yarn cms-pull or npm run cms-pull yet?")
+		console.warn("No sitemap found after sync.");
 	}
 
 	let pageInSitemap = sitemap[path];
@@ -68,13 +68,12 @@ export async function getAgilityPageProps({ context, res }) {
 
 	} else {
 		//Could not find page
-		throw new Error('page [' + path + '] not found in sitemap.');
-
-		//TODO: Redirect to 404 page
+		console.warn('page [' + path + '] not found in sitemap.');
+		return handlePageNotFound();
 	}
 
 	if (!page) {
-		throw new Error('page [' + path + '] not found in getpage method.');
+		console.warn('page [' + path + '] not found in getpage method.');
 	}
 
 
@@ -164,7 +163,6 @@ export async function getAgilityPageProps({ context, res }) {
 	}
 }
 
-
 export async function getAgilityPaths() {
 
 	console.log(`Agility CMS => Fetching sitemap for getAgilityPaths...`);
@@ -190,9 +188,6 @@ export async function getAgilityPaths() {
 
 	if (!sitemapFlat) {
 		console.warn("Agility CMS => No Site map found.  Make sure your environment variables are setup correctly.")
-		if (isDevelopmentMode) {
-			console.warn("Agility CMS => Then run: npm run cms-pull or yarn cms-pull")
-		}
 		return []
 	}
 
@@ -230,54 +225,12 @@ export async function validatePreview({ agilityPreviewKey, slug }) {
 		}
 	}
 
-	//HACK: don't bother checking this right now...
-	//const validateSlugResponse = await validateSlugForPreview({ slug });
-	// if (validateSlugResponse.error) {
-	// 	//kickout
-	// 	return validateSlugResponse;
-	// }
-
 	//return success
 	return {
 		error: false,
 		message: null
 	}
 
-}
-
-const validateSlugForPreview = async ({ slug }) => {
-	//Check that the requested page exists, if not return a 401
-
-	return {
-		error: false,
-		message: null
-	}
-
-	const agilitySyncClient = getSyncClient({
-		isPreview: true
-	});
-
-	await agilitySyncClient.runSync();
-
-
-	const sitemapFlat = await agilitySyncClient.store.getSitemap({
-		channelName,
-		languageCode
-	})
-
-	const pageInSitemap = sitemapFlat[slug];
-
-	if (!pageInSitemap && slug !== `/`) {
-		return {
-			error: true,
-			message: `Invalid page. '${slug}' was not found in the sitemap.`
-		}
-	}
-
-	return {
-		error: false,
-		message: null
-	}
 }
 
 export function generatePreviewKey() {
@@ -299,4 +252,9 @@ export function generatePreviewKey() {
 	return previewKey;
 }
 
+function handlePageNotFound() {
+	return {
+		notFound: true
+	}
+}
 

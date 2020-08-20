@@ -7,13 +7,6 @@ class AgilityPage extends Component {
 	render() {
 		handlePreview();
 
-		//this runtime error ONLY hapens in preview mode...
-		if (this.props.previewError) {
-			return <div>
-				<div>{this.props.previewError}</div>
-			</div>
-		}
-
 		return (
 			<Layout {...this.props} />
 		)
@@ -22,18 +15,12 @@ class AgilityPage extends Component {
 
 export async function getStaticProps(context) {
 
-	// try {
+	const props = await getAgilityPageProps({ context });
+	return {
+		props: props,
+		revalidate: 1 //will refresh page every 1 second on Vercel
+	}
 
-		const props = await getAgilityPageProps({ context });
-		return {
-			props: props,
-			revalidate: 1 //will refresh page every 1 second on Vercel
-		}
-	// } catch (e) {
-	// 	return {
-	// 		props: { previewError: e.message, stack: e }
-	// 	}
-	// }
 }
 
 export async function getStaticPaths() {
