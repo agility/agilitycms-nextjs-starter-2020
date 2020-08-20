@@ -32,15 +32,15 @@ export async function getAgilityPageProps({ context, res }) {
 	});
 
 
-	//only sync if we are in preview mode and NOT development mode
-	if (isPreview && !isDevelopmentMode) {
-		console.log(`Agility CMS => Syncing ${isPreview ? "Preview" : "Live"} Mode`)
-		await agilitySyncClient.runSync();
-	}
+	//always sync to get latest
+	
+	console.log(`Agility CMS => Syncing ${isPreview ? "Preview" : "Live"} Mode`)
+	await agilitySyncClient.runSync();
+	
 
-	if (isDevelopmentMode) {
-		console.log(`Agility CMS => Getting page props for '${path}'...`);
-	}
+	
+	console.log(`Agility CMS => Getting page props for '${path}'...`);
+	
 
 
 	//get sitemap
@@ -68,13 +68,13 @@ export async function getAgilityPageProps({ context, res }) {
 
 	} else {
 		//Could not find page
-		throw 'page [' + path + '] not found in sitemap.';
+		throw new Error('page [' + path + '] not found in sitemap.');
 
 		//TODO: Redirect to 404 page
 	}
 
 	if (!page) {
-		throw 'page [' + path + '] not found in getpage method.';
+		throw new Error('page [' + path + '] not found in getpage method.');
 	}
 
 
@@ -177,10 +177,10 @@ export async function getAgilityPaths() {
 		isDevelopmentMode
 	});
 
-	if (!isDevelopmentMode) {
-		console.log(`Agility CMS => Syncing ${isPreview ? "Preview" : "Live"} Mode`)
-		await agilitySyncClient.runSync();
-	}
+	//always sync to get latest
+	console.log(`Agility CMS => Syncing ${isPreview ? "Preview" : "Live"} Mode`)
+	await agilitySyncClient.runSync();
+	
 
 	const sitemapFlat = await agilitySyncClient.store.getSitemap({
 		channelName,

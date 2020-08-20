@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-	"predev": "node agility/agility.sync.js sync",
-	"dev": "next dev",
+    "predev": "node agility/agility.sync.js sync",
+    "dev": "next dev",
     "build": "next build",
-	"start": "next start",
-	"cms-pull": "node agility/agility.sync.js sync",
+    "start": "next start",
+    "cms-pull": "node agility/agility.sync.js sync",
     "cms-clear": "node agility/agility.sync.js clear"
-
   },
   "dependencies": {
     "@agility/content-fetch": "^0.8.2",
@@ -17,7 +16,7 @@
     "@tailwindcss/typography": "^0.2.0",
     "feather-icons": "^4.28.0",
     "framer-motion": "^2.1.0",
-    "next": "9.4.4",
+    "next": "9.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-modal": "^3.11.2",

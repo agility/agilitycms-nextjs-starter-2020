@@ -22,18 +22,18 @@ class AgilityPage extends Component {
 
 export async function getStaticProps(context) {
 
-	try {
+	// try {
 
 		const props = await getAgilityPageProps({ context });
 		return {
 			props: props,
 			revalidate: 1 //will refresh page every 1 second on Vercel
 		}
-	} catch (e) {
-		return {
-			props: { previewError: e, stack: e }
-		}
-	}
+	// } catch (e) {
+	// 	return {
+	// 		props: { previewError: e.message, stack: e }
+	// 	}
+	// }
 }
 
 export async function getStaticPaths() {
