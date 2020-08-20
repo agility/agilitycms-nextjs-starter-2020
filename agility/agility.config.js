@@ -15,7 +15,7 @@ const getSyncClient = ({ isPreview, isDevelopmentMode }) => {
 
 	let cachePath = `node_modules/@agility/content-sync/cache/${isPreview ? 'preview' : 'live'}`
 
-	if (!isDevelopmentMode && isPreview) {
+	if (!isDevelopmentMode) {
 		//we are in a lambda function, need to use /tmp
 		cachePath = "/tmp/agilitycache"
 	}
