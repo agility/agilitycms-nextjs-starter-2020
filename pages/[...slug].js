@@ -39,8 +39,8 @@ export async function getStaticPaths() {
 	const paths = await getAgilityPaths();
 	return {
 		paths: paths,
-		fallback: true
-		//revalidate: 1
+		fallback: true,
+		revalidate: 1 //will refresh page every 1 second on Vercel
 	}
 }
 
