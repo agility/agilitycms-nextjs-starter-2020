@@ -11,7 +11,6 @@ class AgilityPage extends Component {
 		if (this.props.previewError) {
 			return <div>
 				<div>{this.props.previewError}</div>
-				<div>{this.props.previewError}</div>
 			</div>
 		}
 
@@ -30,9 +29,8 @@ export async function getStaticProps(context) {
 			props: props
 		}
 	} catch (e) {
-
 		return {
-			props: { previewError: e.message, stack: e.stack }
+			props: { previewError: e, stack: e }
 		}
 	}
 }
@@ -41,7 +39,8 @@ export async function getStaticPaths() {
 	const paths = await getAgilityPaths();
 	return {
 		paths: paths,
-		fallback: false
+		fallback: true
+		//revalidate: 1
 	}
 }
 

@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-	"predev": "NODE_ENV=development node agility/agility.sync.js sync",
+	"predev": "node agility/agility.sync.js sync",
 	"dev": "next dev",
     "build": "next build",
 	"start": "next start",
-	"cms-pull": "NODE_ENV=development node agility/agility.sync.js sync",
-    "cms-clear": "NODE_ENV=development node agility/agility.sync.js clear"
+	"cms-pull": "node agility/agility.sync.js sync",
+    "cms-clear": "node agility/agility.sync.js clear"
 
   },
   "dependencies": {

@@ -9,9 +9,10 @@ import GlobalFooter from 'components/agility-global/GlobalFooter'
 const securityKey = agilityConfig.securityKey
 const channelName = agilityConfig.channelName
 const languageCode = agilityConfig.languageCode
-const isDevelopmentMode = process.env.NODE_ENV === "development"
+//const isDevelopmentMode = process.env.NODE_ENV === "development"
+const isDevelopmentMode = false;
 
-export async function getAgilityPageProps({ context }) {
+export async function getAgilityPageProps({ context, res }) {
 
 	let path = '/';
 	if (context.params) {
@@ -67,13 +68,13 @@ export async function getAgilityPageProps({ context }) {
 
 	} else {
 		//Could not find page
-		console.error('page [' + path + '] not found in sitemap.')
+		throw 'page [' + path + '] not found in sitemap.';
 
 		//TODO: Redirect to 404 page
 	}
 
 	if (!page) {
-		console.error('page [' + path + '] not found in getpage method.')
+		throw 'page [' + path + '] not found in getpage method.';
 	}
 
 
