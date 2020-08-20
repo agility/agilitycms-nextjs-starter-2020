@@ -7,12 +7,13 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 [New to Agility CMS? Signup for a free account](https://agilitycms.com/free)
 
-
+ 
 ## About This Website
 - Connected to a sample Agility CMS instance to get content and pages
 - Uses the `getStaticProps` function from Next.js to allow for full static site generation
 - Supports full page management
 - Supports preview mode
+- Uses `revalidate` tag with Vercel to enable incemental static builds
 - Provides a functional structure that dynamically routes each page based on the request, loads a page template dynamically, and also dynamically loads and renders appropriate Agility CMS modules (as React components)
 
 ### Built on Treact Components
@@ -35,6 +36,15 @@ Sign up for the [Agility CMS NextJS Starter](https://account.agilitycms.com/sign
 - `AGILITY_API_PREVIEW_KEY` should be the **Preview API Key** field - this is used when the site is in [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode) and allows your site to pull the latest content, regardless of whether it is published or not.
 - `AGILITY_SECURITY_KEY` should be the **Security Key** field that can be found in [**Settings** > **Global Security**](https://help.agilitycms.com/hc/en-us/articles/360029220591-How-to-Retrieve-an-Instance-s-Security-Key) - this is used to communicate between the CMS and your site to validate [Preview Mode](https://nextjs.org/docs/advanced-features/preview-mode)
 
+## Running Locally (Development Mode)
+When running your site in development mode, you will see the latest content in real-time from the CMS.
+1. `npm run install`
+2. `npm run dev`
+
+## Running Locally (Production Mode)
+When running your site in production mode, you will see published content (only) in real-time from the CMS.
+1. `npm run build`
+2. `npm run start`
 
 ## Deploy
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?c=1&amp;s=https://github.com/agility/agilitycms-nextjs-starter-2020&amp;env=AGILITY_GUID,AGILITY_API_FETCH_KEY,AGILITY_API_PREVIEW_KEY,AGILITY_SECURITY_KEY&amp;envDescription=API%20Keys%20required%20by%20Agility%20CMS&amp;)

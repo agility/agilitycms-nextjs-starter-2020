@@ -12,14 +12,14 @@ const agilityConfig = {
 }
 
 const getSyncClient = ({ isPreview, isDevelopmentMode }) => {
-
+	
 	let cachePath = `node_modules/@agility/content-sync/cache/${isPreview ? 'preview' : 'live'}`
 
-	if (!isDevelopmentMode && isPreview) {
-		//we are in a lambda function, need to use /tmp
+	if (!isDevelopmentMode) {
+		//we are in prod and need to use a different directory that Vercel understands
 		cachePath = "/tmp/agilitycache"
 	}
-
+	console.log('cache path = ' + cachePath)
 	const apiKey = isPreview ? agilityConfig.previewAPIKey : agilityConfig.fetchAPIKey
 
 	return agilityContentSync.getSyncClient({
