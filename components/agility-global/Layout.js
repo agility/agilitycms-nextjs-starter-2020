@@ -39,6 +39,7 @@ export default function Layout(props) {
 
 			</Head>
 			<PreviewBar {...props} />
+			{new Date().toLocaleString()}
 			<MainElem>
 			{/* <AnimationRevealPage disabled> */}
 				<GlobalHeader {...props} />
