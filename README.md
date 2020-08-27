@@ -13,7 +13,7 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 - Uses the `getStaticProps` function from Next.js to allow for full static site generation
 - Supports full page management
 - Supports preview mode
-- Uses `revalidate` tag with Vercel to enable incemental static builds
+- Uses `revalidate` tag with Vercel to enable incremental static builds
 - Provides a functional structure that dynamically routes each page based on the request, loads a page template dynamically, and also dynamically loads and renders appropriate Agility CMS modules (as React components)
 
 ### Built on Treact Components
