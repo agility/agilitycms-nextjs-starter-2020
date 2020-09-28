@@ -5,7 +5,7 @@ import tw from "twin.macro";
 import { Container, ContentWithPaddingLg } from "components/misc/Layouts";
 export const RichText = tw.div`prose prose-sm sm:prose lg:prose-lg xl:prose-xl`
 
-export default (props) => {
+const RichTextArea =  (props) => {
 	return (
 		<Container>
 			<ContentWithPaddingLg>
@@ -15,3 +15,5 @@ export default (props) => {
 	);
 
 }
+
+export default RichTextArea

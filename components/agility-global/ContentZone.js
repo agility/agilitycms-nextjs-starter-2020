@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import dynamic from 'next/dynamic'
 
 
-export default function ContentZone({ name, page, dynamicPageItem }) {
+ function ContentZone({ name, page, dynamicPageItem }) {
 	function RenderModules() {
 
 		let modules = page.zones[name];
@@ -24,3 +24,5 @@ export default function ContentZone({ name, page, dynamicPageItem }) {
 		</div>
 	)
 }
+
+export default ContentZone

@@ -54,7 +54,7 @@ const StyledResponsiveVideoEmbed = styled(ResponsiveVideoEmbed)`
   }
 `;
 
-export default ({ backgroundImage, title, subTitle, announcement, primaryCTA, videoURL }) => {
+const BackgroundAsImage = ({ backgroundImage, title, subTitle, announcement, primaryCTA, videoURL }) => {
 
 	//video url should be in this format for vimeo: //player.vimeo.com/video/374265101?title=0&portrait=0&byline=0&autoplay=0&responsive=1
 	let containerStyle = {
@@ -91,3 +91,5 @@ export default ({ backgroundImage, title, subTitle, announcement, primaryCTA, vi
     </Container>
   );
 };
+
+export default BackgroundAsImage
