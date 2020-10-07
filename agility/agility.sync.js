@@ -14,12 +14,20 @@ const { getSyncClient } = require('./agility.config')
 const runSync = async () => {
 
 	const agilitySyncClient = getSyncClient({ isPreview: true, isDevelopmentMode: true })
+	if (! agilitySyncClient) {
+		console.log("Agility CMS => Sync client could not be accessed.")
+		return;
+	}
 	await agilitySyncClient.runSync();
 }
 
 const clearSync = async () => {
 
 	const agilitySyncClient = getSyncClient({ isPreview: true, isDevelopmentMode: true })
+	if (! agilitySyncClient) {
+		console.log("Agility CMS => Sync client could not be accessed.")
+		return;
+	}
 	await agilitySyncClient.clearSync();
 
 }
