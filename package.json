@@ -9,8 +9,8 @@
 		"cms-clear": "node agility/agility.sync.js clear"
 	},
 	"dependencies": {
-		"@agility/content-fetch": "^0.8.2",
-		"@agility/content-sync": "^0.1.8",
+		"@agility/content-fetch": "^1.0.0",
+		"@agility/content-sync": "^0.1.13",
 		"@tailwindcss/typography": "^0.2.0",
 		"feather-icons": "^4.28.0",
 		"framer-motion": "^2.1.0",
