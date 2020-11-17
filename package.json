@@ -10,7 +10,7 @@
 	},
 	"dependencies": {
 		"@agility/content-fetch": "^1.0.0",
-		"@agility/content-sync": "^0.1.13",
+		"@agility/content-sync": "^0.1.14",
 		"@tailwindcss/typography": "^0.2.0",
 		"feather-icons": "^4.28.0",
 		"framer-motion": "^2.1.0",
