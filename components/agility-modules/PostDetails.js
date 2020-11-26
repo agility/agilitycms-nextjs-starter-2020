@@ -1,101 +1,116 @@
 import tw from "twin.macro";
-import truncate from 'truncate-html'
+import truncate from "truncate-html";
+import Image from "next/image";
 
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
-import { SectionHeading, Subheading as SubheadingBase } from "components/misc/Headings.js";
+import {
+  SectionHeading,
+  Subheading as SubheadingBase,
+} from "components/misc/Headings.js";
 const HeadingRow = tw.div`flex`;
 const Heading = tw(SectionHeading)`text-gray-900 mb-10`;
 const DateField = tw.div``;
-const Author  = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
+const Author = tw.div`font-bold text-lg sm:text-xl lg:text-2xl text-secondary-500 tracking-wide`;
 const Category = tw.div`font-medium text-primary-700`;
-const About = tw.div`text-center`
-const Tag = tw.div`text-gray-700`
+const About = tw.div`text-center`;
+const Tag = tw.div`text-gray-700`;
 
-const ImageRow = tw.div`my-2`
-const Image = tw.img`rounded`
+const ImageRow = tw.div`my-2`;
+const Img = tw(Image)`rounded`;
 
-import {RichText} from "./RichTextArea"
+import { RichText } from "./RichTextArea";
 
-import { renderHTML } from "agility/utils"
+import { renderHTML } from "agility/utils";
 
-const PostDetails = ({ dynamicPageItem, customData}) => {
+const PostDetails = ({ dynamicPageItem, customData }) => {
+  const post = dynamicPageItem.fields;
 
-	const post = dynamicPageItem.fields;
+  return (
+    <Container>
+      <ContentWithPaddingXl>
+        <HeadingRow>
+          <Heading>{post.title}</Heading>
+        </HeadingRow>
+        <About>
+          <Category>{customData.category}</Category>
 
+          <Author>{customData.authorName}</Author>
+          <DateField>{customData.dateStr}</DateField>
+          <Tag>{customData.tagNames}</Tag>
+        </About>
+        {customData.imageUrl && (
+          <ImageRow>
+            <Img
+              src={customData.imageUrl}
+              alt={post.image.label}
+              layout="responsive"
+              height={150}
+              width={300}
+            />
+            {/* <Image src={customData.imageUrl} alt={post.image.label} /> */}
+          </ImageRow>
+        )}
 
-	return (
-		<Container>
-			<ContentWithPaddingXl>
-				<HeadingRow>
-					<Heading>{post.title}</Heading>
-				</HeadingRow>
-				<About>
-					<Category>{ customData.category }</Category>
+        <RichText dangerouslySetInnerHTML={renderHTML(post.content)}></RichText>
+      </ContentWithPaddingXl>
+    </Container>
+  );
+};
 
-					<Author>{ customData.authorName }</Author>
-					<DateField>{  customData.dateStr }</DateField>
-					<Tag>{ customData.tagNames }</Tag>
-				</About>
-				{ customData.imageUrl &&
-					<ImageRow>
-						<Image src={customData.imageUrl} alt={post.image.label} />
-					</ImageRow>
-				}
+PostDetails.getCustomInitialProps = async function ({
+  item,
+  agility,
+  languageCode,
+  channelName,
+  pageInSitemap,
+  dynamicPageItem,
+}) {
+  const api = agility;
 
-				<RichText dangerouslySetInnerHTML={renderHTML(post.content)}></RichText>
-			</ContentWithPaddingXl>
-		</Container>
+  try {
+    const post = dynamicPageItem.fields;
 
-	)
-}
+    const tagNames = post.tags?.map((t) => t?.fields?.title).join(",");
+    const dateStr = new Date(post.date).toLocaleString();
+    let category = null;
+    let authorName = null;
+    if (post.category?.fields) category = post.category.fields?.title;
+    if (post.author?.fields) authorName = post.author.fields?.name;
 
+    let imageUrl = post.image?.url;
+    if (imageUrl) {
+      if (post.image.pixelWidth > 1200) {
+        imageUrl = `${post.image.url}?w=1200`;
+      }
+    }
 
-PostDetails.getCustomInitialProps = async function ({item, agility, languageCode, channelName, pageInSitemap, dynamicPageItem}) {
+    if (!dynamicPageItem.seo) dynamicPageItem.seo = {};
 
-	const api = agility;
+    if (!dynamicPageItem.seo?.metaDescription) {
+      const description = truncate(dynamicPageItem.fields.content, {
+        length: 160,
+        decodeEntities: true,
+        stripTags: true,
+        reserveLastWord: true,
+      });
 
-	try {
+      dynamicPageItem.seo.metaDescription = description;
+    }
 
-		const post = dynamicPageItem.fields
+    if (imageUrl) {
+      dynamicPageItem.seo.ogImage = imageUrl;
+    }
 
-		const tagNames = post.tags?.map(t => t?.fields?.title).join(",")
-		const dateStr = new Date(post.date).toLocaleString()
-		let category = null;
-		let authorName = null;
-		if (post.category?.fields) category = post.category.fields?.title
-		if (post.author?.fields) authorName = post.author.fields?.name
+    return {
+      category,
+      tagNames,
+      dateStr,
+      authorName,
+      imageUrl,
+    };
+  } catch (error) {
+    if (console) console.error(error);
+  }
+};
 
-
-		let imageUrl = post.image?.url;
-		if (imageUrl) {
-			if (post.image.pixelWidth > 1200) {
-				imageUrl = `${post.image.url}?w=1200`
-			}
-		}
-
-		if (! dynamicPageItem.seo) dynamicPageItem.seo = {}
-
-		if (! dynamicPageItem.seo?.metaDescription) {
-			const description = truncate(dynamicPageItem.fields.content, { length: 160, decodeEntities: true, stripTags: true, reserveLastWord: true })
-
-			dynamicPageItem.seo.metaDescription = description;
-		}
-
-		if (imageUrl) {
-			dynamicPageItem.seo.ogImage =  imageUrl
-		}
-
-		return  {
-			category,
-			tagNames,
-			dateStr,
-			authorName,
-			imageUrl
-		}
-
-	} catch (error) {
-		if (console) console.error(error);
-	}
-}
-
-export default PostDetails
+export default PostDetails;
