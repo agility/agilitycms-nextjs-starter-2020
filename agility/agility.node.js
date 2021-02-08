@@ -253,6 +253,47 @@ export async function validatePreview({ agilityPreviewKey, slug }) {
 
 }
 
+export async function getDynamicPageURL({ contentID, preview }) {
+	console.log(`Agility CMS => Retrieving Dynamic Page URL by ContentID...`);
+
+	//determine if we are in preview mode
+	const isPreview = preview || isDevelopmentMode;
+
+	//determine if we've already done a full build yet
+	const buildFilePath = `${process.cwd()}/.next/cache/agility/build.log`
+	const isBuildComplete = fs.existsSync(buildFilePath)
+
+	const agilitySyncClient = getSyncClient({
+		isPreview,
+		isDevelopmentMode,
+		isIncremental: isBuildComplete
+	});
+
+
+	if (! agilitySyncClient) {
+		console.log("Agility CMS => Sync client could not be accessed.")
+		return [];
+	}
+
+	const sitemapFlat = await agilitySyncClient.store.getSitemap({
+		channelName,
+		languageCode
+	});
+
+	const dynamicPaths = Object.keys(sitemapFlat).filter(s => {
+		if(sitemapFlat[s].contentID == contentID) {
+			return s;
+		}
+	})
+
+	if(dynamicPaths.length > 0) {
+		return dynamicPaths[0]; //return the first one found
+	} else {
+		return null; //no dynamic path
+	}
+	
+}
+
 export function generatePreviewKey() {
 	//the string we want to encode
 	const str = `-1_${securityKey}_Preview`;

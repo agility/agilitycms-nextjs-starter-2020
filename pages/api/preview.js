@@ -1,4 +1,4 @@
-import { validatePreview } from '../../agility/agility.node'
+import { validatePreview, getDynamicPageURL } from '../../agility/agility.node'
 
 // A simple example for testing it manually from your browser.
 // If this is located at pages/api/preview.js, then
@@ -15,11 +15,21 @@ export default async (req, res) => {
 		return res.status(401).end(`${validationResp.message}`)
 	}
 
+	let previewUrl = req.query.slug;
+
+	//TODO: these kinds of dynamic links should work by default (even outside of preview)
+	if(req.query.ContentID) {
+		const dynamicPath = await getDynamicPageURL({contentID: req.query.ContentID, preview: true});
+		if(dynamicPath) {
+			previewUrl = dynamicPath;
+		}
+	}
+
 	//enable preview mode
 	res.setPreviewData({})
 
 	// Redirect to the slug
-	res.writeHead(307, { Location: req.query.slug })
+	res.writeHead(307, { Location: previewUrl })
 	res.end()
 
 }

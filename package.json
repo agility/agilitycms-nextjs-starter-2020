@@ -1,6 +1,6 @@
 {
   "name": "agility-nextjs-starter-2020",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "scripts": {
     "predev": "node agility/agility.sync.js sync",
@@ -8,8 +8,8 @@
     "prebuild": "node agility/agility.sync.js prebuild",
     "build": "next build",
     "postbuild": "node agility/agility.sync.js postbuild",
-	"start": "next build && next start",
-	"cms-pull": "NODE_ENV=development && node framework/agility/agility.sync.js sync",
+    "start": "next build && next start",
+    "cms-pull": "NODE_ENV=development && node framework/agility/agility.sync.js sync",
     "cms-clear": "node agility.sync.js clear"
   },
   "dependencies": {
