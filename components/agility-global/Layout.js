@@ -1,62 +1,68 @@
-import PreviewBar from './PreviewBar'
-import GlobalHeader from './GlobalHeader'
-import GlobalFooter from './GlobalFooter'
-import { useRouter } from 'next/router'
-import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import tw from "twin.macro"
+import PreviewBar from "./PreviewBar";
+import GlobalHeader from "./GlobalHeader";
+import GlobalFooter from "./GlobalFooter";
+import { useRouter } from "next/router";
+import SEO from "../seo/SEO";
+import dynamic from "next/dynamic";
+import tw from "twin.macro";
 
 const MainElem = tw.main`p-8`;
 
-import AnimationRevealPage from "helpers/AnimationRevealPage"
-import Error from 'next/error'
+import AnimationRevealPage from "helpers/AnimationRevealPage";
+import Error from "next/error";
 
 function Layout(props) {
-	const { page, sitemapNode, dynamicPageItem, notFound } = props
+  const { page, sitemapNode, dynamicPageItem, notFound } = props;
 
-	// If the page is not yet generated, this will be displayed
-	// initially until getStaticProps() finishes running
-	const router = useRouter()
-	if (router.isFallback) {
-		return <div>Loading page...</div>
-	}
+  // If the page is not yet generated, this will be displayed
+  // initially until getStaticProps() finishes running
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading page...</div>;
+  }
 
-	if (notFound === true) {
-		return <Error statusCode="404" />
-	}
+  if (notFound === true) {
+    return <Error statusCode="404" />;
+  }
 
-	const AgilityPageTemplate = dynamic(() => import('components/agility-pageTemplates/' + props.pageTemplateName));
+  const AgilityPageTemplate = dynamic(() =>
+    import("components/agility-pageTemplates/" + props.pageTemplateName)
+  );
 
-	if (dynamicPageItem?.seo?.metaDescription) {
-		page.seo.metaDescription = dynamicPageItem.seo.metaDescription
-	}
+  // check if dynamic page for meta description
+  if (dynamicPageItem?.seo?.metaDescription) {
+    page.seo.metaDescription = dynamicPageItem.seo.metaDescription;
+  }
 
-	return (
-		<>
-			<Head>
-				<title>{sitemapNode?.title} - Agility CMS Sample Blog</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-				<meta name="description" content={page.seo.metaDescription} />
-				<meta name="generator" content="Agility CMS" />
-				<meta name="agility_timestamp" content={new Date().toLocaleString()} />
-				{dynamicPageItem?.seo?.ogImage &&
-					<meta property="og:image" content={dynamicPageItem.seo.ogImage} />
-				}
-				<link rel="stylesheet" href="/prose.css" />
+  // check if dynamic page for meta keywords
+  if (dynamicPageItem?.seo?.metaKeywords) {
+    page.seo.metaKeywords = dynamicPageItem.seo.metaKeywords;
+  }
 
-			</Head>
-			<PreviewBar {...props} />
+  // check if dynamic page for additional header markup
+  if (dynamicPageItem?.seo?.metaHTML) {
+    page.seo.metaHTML = dynamicPageItem.seo.metaHTML;
+  }
 
-			<MainElem>
-				{/* <AnimationRevealPage disabled> */}
-				<GlobalHeader {...props} />
-				<AgilityPageTemplate {...props} />
-				<GlobalFooter {...props} />
-				{/* </AnimationRevealPage> */}
-			</MainElem>
-
-		</>
-	)
+  return (
+    <>
+      <SEO
+        title={sitemapNode?.title}
+        description={page.seo.metaDescription}
+        keywords={page.seo.metaKeywords}
+        ogImage={dynamicPageItem?.seo?.ogImage}
+        metaHTML={page.seo.metaHTML}
+      />
+      <PreviewBar {...props} />
+      <MainElem>
+        {/* <AnimationRevealPage disabled> */}
+        <GlobalHeader {...props} />
+        <AgilityPageTemplate {...props} />
+        <GlobalFooter {...props} />
+        {/* </AnimationRevealPage> */}
+      </MainElem>
+    </>
+  );
 }
 
-export default Layout
+export default Layout;
