@@ -7,7 +7,7 @@ This is sample Next.js starter site that uses Agility CMS and aims to be a found
 
 [New to Agility CMS? Signup for a free account](https://agilitycms.com/free)
 
- 
+
 ## About This Website
 - Connected to a sample Agility CMS instance to get content and pages
 - Uses the `getStaticProps` function from Next.js to allow for full static site generation
@@ -38,11 +38,27 @@ Sign up for the [Agility CMS NextJS Starter](https://account.agilitycms.com/sign
 
 ## Running Locally (Development Mode)
 When running your site in development mode, you will see the latest content in real-time from the CMS.
+### yarn
+1. `yarn install`
+2. `yarn dev`
+
+To update content locally without restarting your dev server, run `yarn cms-pull`
+
+### npm
 1. `npm run install`
 2. `npm run dev`
 
+To update content locally without restarting your dev server, run `npm run cms-pull`
+
+
 ## Running Locally (Production Mode)
 When running your site in production mode, you will see published content (only) in real-time from the CMS.
+
+### yarn
+1. `yarn build`
+2. `yarn start`
+
+### npm
 1. `npm run build`
 2. `npm run start`
 
