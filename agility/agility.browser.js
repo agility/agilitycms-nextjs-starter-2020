@@ -25,9 +25,16 @@ const handlePreview = () => {
 	//redirect this to our preview API route
 	const previewAPIRoute = `/api/preview`;
 
+	let previewAPIUrl= `${previewAPIRoute}?slug=${window.location.pathname}&agilitypreviewkey=${agilityPreviewKey}`;
+
+	const dynamicPageContentID = getParameterByName('ContentID') ?? getParameterByName('contentID');
+
+	if(dynamicPageContentID > 0) {
+		previewAPIUrl += `&ContentID=${dynamicPageContentID}`;
+	}
 
 	//do the redirect
-	window.location.href = `${previewAPIRoute}?slug=${window.location.pathname}&agilitypreviewkey=${agilityPreviewKey}`
+	window.location.href = previewAPIUrl;
 
 }
 
