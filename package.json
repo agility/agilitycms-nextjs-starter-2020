@@ -8,13 +8,13 @@
     "prebuild": "node agility/agility.sync.js prebuild",
     "build": "next build",
     "postbuild": "node agility/agility.sync.js postbuild",
-	"start": "next build && next start",
-	"cms-pull": "NODE_ENV=development && node framework/agility/agility.sync.js sync",
+    "start": "next build && next start",
+    "cms-pull": "NODE_ENV=development && node framework/agility/agility.sync.js sync",
     "cms-clear": "node agility.sync.js clear"
   },
   "dependencies": {
-    "@agility/content-fetch": "^1.0.0",
-    "@agility/content-sync": "^0.1.23",
+    "@agility/content-fetch": "^1.0.3",
+    "@agility/content-sync": "^0.1.24",
     "@tailwindcss/typography": "^0.2.0",
     "feather-icons": "^4.28.0",
     "framer-motion": "^2.1.0",
