@@ -1,6 +1,6 @@
 {
   "name": "agility-nextjs-starter-2020",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "scripts": {
     "predev": "node agility/agility.sync.js sync",
