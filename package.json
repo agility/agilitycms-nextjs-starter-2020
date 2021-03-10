@@ -9,8 +9,8 @@
     "build": "next build",
     "postbuild": "node agility/agility.sync.js postbuild",
     "start": "next build && next start",
-    "cms-pull": "NODE_ENV=development && node framework/agility/agility.sync.js sync",
-    "cms-clear": "node agility.sync.js clear"
+    "cms-pull": "NODE_ENV=development && node agility/agility.sync.js sync",
+    "cms-clear": "node agility/agility.sync.js clear"
   },
   "dependencies": {
     "@agility/content-fetch": "^1.0.3",
