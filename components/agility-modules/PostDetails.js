@@ -58,7 +58,7 @@ PostDetails.getCustomInitialProps = async function ({item, agility, languageCode
 
 		const post = dynamicPageItem.fields
 
-		const tagNames = post.tags?.map(t => t?.fields?.title).join(",")
+		const tagNames = post.tags?.map(t => t?.fields?.title).join(",") || null
 		const dateStr = new Date(post.date).toLocaleString()
 		let category = null;
 		let authorName = null;
