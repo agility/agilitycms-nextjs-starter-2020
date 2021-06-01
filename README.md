@@ -1,4 +1,7 @@
 # Next.js + Agility CMS
+
+### ⚠️ ATTENTION: This starter is deprecated, if using Next.js with Agility CMS please use our updated starter: https://github.com/agility/agilitycms-nextjs-starter
+
 This is sample Next.js starter site that uses Agility CMS and aims to be a foundation for building fully static sites using Next.js and Agility CMS.
 
 > NextJS Preview is now supported on Vercel!
